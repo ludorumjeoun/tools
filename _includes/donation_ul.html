@@ -1,0 +1,5 @@
+<ul class="donation-list sans">
+    {% for address in site.data.address %}
+    <li><b>{{ address.symbol }}</b>&nbsp;{{ address.address }}</li>
+    {% endfor %}
+</ul>

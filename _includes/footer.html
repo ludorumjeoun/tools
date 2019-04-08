@@ -28,11 +28,7 @@
 
       <div class="footer-col footer-col-3">
         <p>{{- site.description | escape -}}</p>
-        <ul class="donation-list">
-          {% for address in site.data.address %}
-          <li><small><b>{{ address.symbol }}</b>&nbsp;{{ address.address }}</small></li>
-          {% endfor %}
-        </ul>
+        {%- include donation_ul.html -%}
       </div>
     </div>
 
