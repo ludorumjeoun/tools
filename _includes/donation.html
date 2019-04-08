@@ -1,0 +1,7 @@
+<h4>Donation</h4>
+<dl>
+    {% for address in site.data.address %}
+    <dt>{{ address.type }}</dt>
+    <dd>{{ address.address }}</dd>
+    {% endfor %}
+</dl>

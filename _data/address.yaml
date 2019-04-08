@@ -1,0 +1,6 @@
+- type: "Ethereum"
+  symbol: "ETH"
+  address: "0x00BB1b2Fcb71F604a9D441d33D36B752e2E8A52F"
+- type: "Bitcoin"
+  symbol: "BTC"
+  address: "3P4Feh9tUaTdaxPkE1Uv3Bp1oFnLYmZqQy"
