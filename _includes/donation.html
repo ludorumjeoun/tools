@@ -1,6 +1,6 @@
 <ul>
 {% for address in site.data.address %}
-<li class="sans"><b>{{ address.symbol }}</b> <code>{{ address.address }}</code></li>
+<li class="sans"><b>{{ address.symbol }}</b> <a href="{{ address.explorer_account }}{{ address.address }}" target="_blank"><code>{{ address.address }}</code></a></li>
 {% endfor %}
 <li><b class="sans"><a href="https://qr.kakaopay.com/2810060110000028190677901f408435" target="_blank">카카오 페이</a></b></li>
 </ul>
