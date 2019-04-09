@@ -9,7 +9,7 @@
   explorer_account: "https://www.blockchain.com/btc/address/"
   explorer_tx: "https://www.blockchain.com/btc/tx/"
 - type: "Stellar Lumens"
-  symbol: "XML"
+  symbol: "XLM"
   address: "GAFJPNIW26MZOFODX322RKR56G4KA7RKWORPQ4FF3N5UQBM66E7CYEFD"
   explorer_account: "https://stellar.expert/explorer/public/account/"
   explorer_tx: "https://stellar.expert/explorer/public/tx/"
