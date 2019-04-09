@@ -7,7 +7,13 @@
 <div class="donor-list">
     {% endif %}
     <div class="donor-item">
-        <h4><a href="{{ donor.url }}" target="_blank">{{ donor.title }}</a></h4>
+        <h4>
+            {% if donor.url %}
+            <a href="{{ donor.url }}" target="_blank">{{ donor.title }}</a>
+            {% else %}
+            {{ donor.title }}
+            {% endif %}
+        </h4>
         <div><small>{{ donor.body }}</small></div>
     </div>
     {% if forloop.last %}
