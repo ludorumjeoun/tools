@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Donors
-permalink: /donors
+permalink: donors
 ---
 
 ## 후원하기
