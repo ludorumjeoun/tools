@@ -12,6 +12,23 @@ body {
     list-style: none;
     margin-left: 0;
 }
+.donor-list {
+    display: flex;
+    .donor-item {
+        max-width: 240px;
+        width: calc(33.3% - 20px);
+        height: 120px;
+        background: #fafafa;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        margin: 5px;
+        padding: 5px;
+        text-align:center;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+    }
+}
 .sans {
     font-family: 'Gothic A1', sans-serif;
 }

@@ -102,7 +102,15 @@ footer .container {
                     </h4>
                     <small>{{- site.description | escape -}}</small>
                 </div>
-                <div class="col-md-8">{% include donation.html %}</div>
+                <div class="col-md-8">
+                    <h4>Donation</h4>
+                    <dl>
+                        {% for address in site.data.address %}
+                        <dt>{{ address.type }}</dt>
+                        <dd>{{ address.address }}</dd>
+                        {% endfor %}
+                    </dl>
+                </div>
             </div>
         </div>
     </footer>

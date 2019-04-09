@@ -1,42 +1,30 @@
-- date: 2018-11
-  category:
-    - name: STEEM
-      count: 2
-    - name: 인생
-      count: 1
-    - name: 일반 기술
-      count: 1
-- date: 2018-12
-  category:
-    - name: STEEM
-      count: 2
-    - name: 서비스 구현
-      count: 1
-    - name: Javascript
-      count: 2
-    - name: Blockchain
-      count: 2
-- date: 2019-01
-  category:
-    - name: Ethereum
-      count: 6
-    - name: 일반 기술
-      count: 1
-- date: 2019-02
-  category:
-    - name: Bitcoin
-      count: 1
-    - name: 일반 기술
-      count: 2
-- date: 2019-03
-  category:
-    - name: EOS
-      count: 1
-- date: 2019-04
-  category:
-    - name: Firebase
-      count: 1
-    - name: Android
-      count: 1
-    - name: 일반 기술
-      count: 10
+- title: 류짬
+  body: 크립토 쁘락치
+  url: https://facebook.com/yeonghun.ryu.31
+  scale: 10
+- title: Willson
+  body:
+  url:
+  scale: 10
+- title: 오세용
+  body: 개발하는 기자 개기자
+  url: http://ohseyong.com/
+  scale: 1
+- title: 이상욱
+  body: 암호자산 투자/인덱스/가치평가 전문각
+  url: https://facebook.com/KevinLeeCAV
+  scale: 10
+- title: 익명
+  body: 블록체인 개발자
+  url:
+  scale: 1
+  anon: true
+- title: 익명
+  body: EOS dApp 개발자
+  url:
+  scale: 100
+  anon: true
+- title: 이정훈
+  body: 미8군
+  url:
+  scale: 10
