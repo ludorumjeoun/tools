@@ -1,0 +1,42 @@
+- date: 2018-11
+  category:
+    - name: STEEM
+      count: 2
+    - name: 인생
+      count: 1
+    - name: 일반 기술
+      count: 1
+- date: 2018-12
+  category:
+    - name: STEEM
+      count: 2
+    - name: 서비스 구현
+      count: 1
+    - name: Javascript
+      count: 2
+    - name: Blockchain
+      count: 2
+- date: 2019-01
+  category:
+    - name: Ethereum
+      count: 6
+    - name: 일반 기술
+      count: 1
+- date: 2019-02
+  category:
+    - name: Bitcoin
+      count: 1
+    - name: 일반 기술
+      count: 2
+- date: 2019-03
+  category:
+    - name: EOS
+      count: 1
+- date: 2019-04
+  category:
+    - name: Firebase
+      count: 1
+    - name: Android
+      count: 1
+    - name: 일반 기술
+      count: 10
