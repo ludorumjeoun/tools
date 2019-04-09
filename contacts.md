@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Contact
-permalink: /contact
+permalink: contacts
 ---
 
 ### 기술 문의
