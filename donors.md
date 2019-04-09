@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Dornors
-permalink: /dornors/
+title: Donors
+permalink: /donors/
 ---
 
 ## 후원하기
