@@ -1,11 +1,5 @@
-{% for donor in donors %}
-{% assign newline = forloop.index | modulo: 3 %}
-{% if newline == 1  %}
-{% if forloop.first == false %}
-</div>
-{% endif %}
 <div class="donor-list">
-    {% endif %}
+    {% for donor in donors %}
     <div class="donor-item">
         <h4>
             {% if donor.url %}
@@ -16,7 +10,5 @@
         </h4>
         <div><small>{{ donor.body }}</small></div>
     </div>
-    {% if forloop.last %}
+    {% endfor %}
 </div>
-{% endif %}
-{% endfor %}

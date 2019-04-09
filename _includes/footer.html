@@ -7,28 +7,24 @@
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">
-            {%- if site.author -%}
-            {{ site.author | escape }}
-            {%- else -%}
-            {{ site.title | escape }}
-            {%- endif -%}
-          </li>
-          {%- if site.email -%}
-          <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-          {%- endif -%}
-        </ul>
+        <a class="grey" href="/about">
+          <p class="small">
+            후원 및 문의
+          </p>
+          <div class="x-small">
+            {%- include donation_ul.html -%}
+
+          </div>
+        </a>
       </div>
 
       <div class="footer-col footer-col-2">
 
-        {%- include social.html -%}
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>{{- site.description | escape -}}</p>
-        {%- include donation_ul.html -%}
+        <p class="small">사이트 소개</p>
+        <div class="x-small">{{- site.description | escape -}}</div>
       </div>
     </div>
 

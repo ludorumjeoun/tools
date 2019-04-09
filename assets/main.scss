@@ -8,15 +8,15 @@ body {
     font-family: 'Noto Serif KR', serif;
 }
 .donation-list {
-    font-size: 13px;
     list-style: none;
     margin-left: 0;
 }
 .donor-list {
     display: flex;
+    flex-wrap: wrap;
     .donor-item {
         max-width: 240px;
-        width: calc(33.3% - 20px);
+        width: calc(33.3% - 22px);
         height: 120px;
         background: #fafafa;
         border: 1px solid #eee;
@@ -29,9 +29,29 @@ body {
         justify-content: stretch;
     }
 }
+@media screen and (max-width: 800px) {
+    .donor-list {
+        .donor-item {
+            width: calc(50% - 22px);
+        }
+    }
+}
 .sans {
     font-family: 'Gothic A1', sans-serif;
 }
 .small {
     font-size: 13px;
+}
+.x-small {
+    font-size: 10px;
+}
+.grey  {
+    color: #828282;
+    &:visited {
+        color: #828282;
+    }
+}
+.no-list-style {
+    list-style: none;
+    margin-left: 0;
 }
