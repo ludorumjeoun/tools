@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/ludorum
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://ludorum.dev
+  * I am ludorum (https://keybase.io/ludorum) on keybase.
+  * I have a public key ASCFwwvnd_HimhZA5jK52CA9uXvygdMZFdiXlDG0phlhewo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012085c30be777f1e29a1640e632b9d8203db97bf281d31915d8979431b4a619617b0a",
+      "host": "keybase.io",
+      "kid": "012085c30be777f1e29a1640e632b9d8203db97bf281d31915d8979431b4a619617b0a",
+      "uid": "c44dee3a7dabeb1ad5ffba9b0b551219",
+      "username": "ludorum"
+    },
+    "merkle_root": {
+      "ctime": 1554877317,
+      "hash": "9eefe0f9ecb46e5a0640119a52fd96a6b8d0d514a364b17d21a0d08cb056873e7ee307775ce118f962e97a7a0acf40a7ae8624246dae724fa5206d7d9bf1aa8a",
+      "hash_meta": "dd9bb6e155124190ca9b2ea3d3d264e047e797d2867c717dcf71ec1960bbe9d6",
+      "seqno": 5132246
+    },
+    "service": {
+      "entropy": "zNIsLKuqGKXyVo3IIDLizF9i",
+      "hostname": "ludorum.dev",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "3.1.2"
+  },
+  "ctime": 1554877346,
+  "expire_in": 504576000,
+  "prev": "59809698e37afb697af547144b9ab33c59828087cf74e0341249f668c91296d3",
+  "seqno": 58,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEghcML53fx4poWQOYyudggPbl78oHTGRXYl5QxtKYZYXsKp3BheWxvYWTESpcCOsQgWYCWmON6+2l69UcUS5qzPFmCgIfPdOA0Ekn2aMkSltPEIEuw0/l/Jdli4ZCG//C6S5ku4tQoX2XcrrJUb3abMLjcAgHCo3NpZ8RAWoz0uHOWDVR6GuW7JKdJry5PPD4ql7gJa4qdHsaPyq9AQ+80nr+OEicN2t9iSHJYrAJMT9k1YuwhIHOtKiTKBahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIOGBiMSK8k/aeNpS33bfDJg5DQrtgTwfPGlOeBtSYL7yo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ludorum
+
+==================================================================
