@@ -23,6 +23,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ludorum.dev" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ludorumx
 github_username:  ludorumjeoun
+google_analytics: UA-138175353-1
 
 permalink: /:categories/:year/:month/:day/:title/
 
