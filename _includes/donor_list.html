@@ -9,6 +9,13 @@
             {% endif %}
         </h4>
         <div><small>{{ donor.body }}</small></div>
+        <div><small>
+            {% if donor.scale < 1000000 %}
+                {{ donor.scale }} Satoshi
+            {% else %}
+                {{ donor.scale | divided_by: 100000000.0 }} Bitcoin
+            {% endif %}
+        </small></div>
     </div>
     {% endfor %}
 </div>

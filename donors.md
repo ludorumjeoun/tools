@@ -11,11 +11,10 @@ permalink: donors
 
 ## 후원자
 
-{% for i in site.data.donor_scale %}
-{% assign donors = site.data.donor | where_exp: "item", "item.scale == i" %}
+{% for scale in site.data.donor_scale %}
+{% assign donors = site.data.donor | where_exp: "item", "item.scale <= scale.max" | where_exp: "item", "item.scale > scale.min" | reverse | sort: "scale" | reverse %}
 {% if donors.size > 0 %}
-### ${{ i }}
 {% include donor_list.html donors=donors %}
-{% endif %}
 <br/>
+{% endif %}
 {% endfor %}
