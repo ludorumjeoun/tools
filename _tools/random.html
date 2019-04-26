@@ -303,7 +303,119 @@ description: "점심메뉴를 고르거나, 누가 커피를 살까? 하는 내�
         }
         $('#notify_me').hide();
     }
+
+    function buildDice(number) {
+        var $dice = $("<div/>", {
+            "class":`dice-face-${number}`
+        })
+        switch(number) {
+            case 1:
+                $dice.html('<span class="pip"></span>');
+                break;
+            case 2:
+                $dice.html('<span class="pip"></span><span class="pip"></span>');
+                break;
+            case 3:
+                $dice.html('<span class="pip"></span><span class="pip"></span><span class="pip"></span>');
+                break;
+            case 4:
+                $dice.html('<div class="column"><span class="pip"></span><span class="pip"></span></div><div class="column"><span class="pip"></span><span class="pip"></span></div>');
+                break;
+            case 5:
+                $dice.html('<div class="column"><span class="pip"></span><span class="pip"></span></div><div class="column"><span class="pip"></span></div><div class="column"><span class="pip"></span><span class="pip"></span></div>');
+                break;
+            case 6:
+                $dice.html('<div class="column"><span class= "pip" ></span ><span class="pip"></span><span class="pip"></span></div ><div class="column"><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>');
+                break;
+        }
+        return $dice;
+    }
 </script>
+<style>
+.dice-face-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice-face-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dice-face-2 .pip:nth-of-type(2) {
+  align-self: flex-end;
+}
+
+.dice-face-3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dice-face-3 .pip:nth-of-type(2) {
+  align-self: center;
+}
+
+.dice-face-3 .pip:nth-of-type(3) {
+  align-self: flex-end;
+}
+
+.dice-face-4, .dice-face-6 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dice-face-4 .column, .dice-face-6 .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dice-face-5 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dice-face-5 .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dice-face-5 .column:nth-of-type(2) {
+  justify-content: center;
+}
+
+/* OTHER STYLES */
+[class$="face"] {
+  margin: 4px;
+  padding: 4px;
+
+  background-color: #e7e7e7;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+
+  box-shadow:
+    inset 0 2px white,
+    inset 0 -2px #bbb,
+    inset 2px 0 #d7d7d7,
+    inset -2px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 20%;
+  margin: 1px;
+
+  background-color: #333;
+  box-shadow: inset 0 1px #111, inset 0 -1px #555;
+}
+</style>
 
 <div class="card">
     <div class="card-header">
@@ -327,6 +439,7 @@ description: "점심메뉴를 고르거나, 누가 커피를 살까? 하는 내�
                         <img id="input_id_image" src="https://robohash.org/default.png?set=set4"
                             style="width:80px; height:80px;">
                     </div>
+                    <div id="input_id_dice"></div>
                 </div>
             </div>
             <div class="row">

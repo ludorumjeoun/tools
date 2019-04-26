@@ -1,0 +1,332 @@
+---
+layout: bootstrap
+title: Board-Game Streams Number Drawer
+description: "보드게임  Streams를 즐기는 것에 무료로 이더리움(Ethereum)을 사용해보세요."
+---
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.1/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/0.15.3/stellar-sdk.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
+<script>
+    $(function () {
+        moment.defaultFormat = 'YYYY-MM-DD HH:mm:ss'
+
+        const server = new StellarSdk.Server('https://horizon-mon.stellar-ops.com/');
+        var $list = $('#list');
+        var $link = $('#link');
+        var $open = $('#open');
+        var $qrcode = $('#qrcode');
+        const input = location.search.split(/\?|\&/)
+            .filter(s => s)
+            .map(s => s.split(/=/))
+            .reduce((m, [k, v]) => { m[k] = v; return m }, {})
+
+        const game = {};
+        window.game = game;
+        async function getLedger(number) {
+            async function getFromCahceOrNetwork() {
+                const key = 'stellar_ledger_' + number;
+                try {
+                    const cache = sessionStorage.getItem(key);
+                    if (cache) {
+                        try {
+                            const ledger = JSON.parse(cache);
+                            if (ledger.closed_at) {
+                                return ledger;
+                            }
+                        } catch (e) {
+
+                        }
+                    }
+                } catch (e) {
+                    sessionStorage.clear();
+                }
+                try {
+                    const record = await server.ledgers().ledger(number).call();
+                    if (record) {
+                        const ledger  =  {
+                            prev_hash: record.prev_hash,
+                            hash: record.hash,
+                            sequence: record.sequence,
+                            closed_at: record.closed_at,
+                        }
+                        sessionStorage.setItem(key, JSON.stringify(ledger));
+                        return ledger;
+                    }
+                } catch (e) {
+                    if (e.message == "Not Found") {
+
+                    } else {
+                        console.error(e);
+                    }
+                }
+            }
+            const ledger = await getFromCahceOrNetwork();
+            if (ledger && ledger.sequence > game.head_ledger_sequence) {
+                game.head_ledger_time = ledger.closed_at;
+                game.head_ledger_sequence = ledger.sequence;
+            }
+            return ledger;
+        }
+        async function getLastLedger() {
+            const ledgers = await server.ledgers().order("desc").limit(1).call();
+            const last = ledgers.records[0]
+            const key = 'stellar_ledger_' + last.sequence;
+            const ledger = {
+                prev_hash: last.prev_hash,
+                hash: last.hash,
+                sequence: last.sequence,
+                closed_at: last.closed_at,
+            };
+            sessionStorage.setItem(key, JSON.stringify(ledger));
+            if (ledger && ledger.sequence > game.head_ledger_sequence) {
+                game.head_ledger_time = ledger.closed_at;
+                game.head_ledger_sequence = ledger.sequence;
+            }
+            return ledger;
+        }
+        async function draw() {
+            console.log(game);
+            const inPocket = [];
+            const outPocket = [];
+            for (var i = 1; i <= 10; i++) {
+                inPocket.push(i);
+            }
+            for (var i = 11; i <= 20; i++) {
+                inPocket.push(i);
+                inPocket.push(i);
+            }
+            for (var i = 21; i <= 30; i++) {
+                inPocket.push(i);
+            }
+            inPocket.push(0);
+
+            const readyTime = 10;
+            let firstBlock = await getLedger(game.start_number);
+            let firstTime = new Date(firstBlock.closed_at).getTime() + (readyTime * 1000);
+            let lastTime = Math.min(new Date().getTime(), firstTime + (game.draw_term * 1000 * inPocket.length));
+            let currentTime = firstTime;
+            let currentBlock = firstBlock;
+            const gap =  (game.draw_term * 1000) - 1;
+            while(outPocket.length < 20 && currentTime <= lastTime) {
+                let nextTime = currentTime + gap;
+                while(true) {
+                    const nextBlock = await getLedger(currentBlock.sequence + 1);
+                    if (nextBlock) {
+                        // 시간이 더 지나야 함
+                        if (new Date(nextBlock.closed_at).getTime() < nextTime) {
+                            currentBlock = nextBlock;
+                            continue;
+                        }
+                        // 인정
+                        // currentBlock = nextBlock;
+                        nextTime = new Date(nextBlock.closed_at).getTime();
+                        break;
+                    }
+                    break;
+                }
+                if (nextTime == currentTime + gap) {
+                    break;
+                }
+                const lastByte = Web3.utils.hexToBytes("0x"+currentBlock.hash).pop();
+                const drawNumber = inPocket.splice(lastByte % inPocket.length, 1)[0];
+                // console.log(currentBlock.sequence,
+                //     `${Math.floor((new Date().getTime() - new Date(currentBlock.closed_at).getTime())*0.001)}초 전,\t${(nextTime - currentTime) * 0.001}초 차이,\t시작한지 ${(nextTime - firstTime) * 0.001}초`,
+                //     drawNumber);
+                outPocket.push(drawNumber);
+                currentTime = nextTime;
+            }
+            console.log(inPocket, outPocket);
+            const liNumbers = outPocket.reverse().map(number => {
+                return $('<div/>', {
+                    "class": "number-card",
+                    "text": number == 0 ? "✪" : number
+                })
+            })
+            $("#list").html(liNumbers);
+            outPocket.reverse().slice(-1).forEach(number => {
+                const old = $("#title").data("old");
+                if (old != number) {
+                    $("#title").data("old", number);
+                    $("#title .title").text(number == 0 ? "✪" : number);
+                    $("#title").removeClass("draw");
+                }
+            })
+            game.nextTime = null;
+            game.done = outPocket.length >= 20;
+            if (!game.done) {
+                game.nextTime = currentTime + gap;
+                const over = (new Date().getTime() - game.nextTime);
+                if (over > 0) {
+                    console.log(`${Math.floor(over * 0.001)}초 지났다`);
+                    setTimeout(() => {
+                        draw();
+                    }, 2000);
+                } else {
+                    console.log(`${Math.floor(-over * 0.001)}초 남았다`);
+                    setTimeout(() => {
+                        draw();
+                    }, (- over) + 1000);
+                }
+            }
+        }
+
+        (async function() {
+            const lastLedger = await getLastLedger();
+            game.draw_term = Number(input.t || 15);
+            game.start_number = Number(input.b || lastLedger.sequence);
+            game.head_ledger_time = lastLedger.closed_at;
+            game.head_ledger_sequence = lastLedger.sequence;
+            window.history.replaceState(null, document.title, '?' + $.param({
+                b: game.start_number,
+                t: game.draw_term,
+            }));
+            draw();
+            $("#next_label").text(` Every ${game.draw_term}s`);
+            $("#input_id_image").attr("src",  `https://robohash.org/${game.start_number}.png?set=set4`);
+            setInterval(() => {
+                if (game.nextTime) {
+                    var remainTime = Math.ceil((game.nextTime - new Date().getTime()) * 0.001);
+                    if (remainTime <= 0) {
+                        remainTime = "Draw...";
+                        $("#title").addClass("draw");
+                        $("#title .title").text("?");
+                    }
+                    $("#next").val(remainTime);
+                } else if (game.done) {
+                    $("#next").val("Done");
+                }
+            }, 100);
+        })();
+    });
+
+    function createLink() {
+        var target = $('#link')[0];
+        target.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the text: " + target.value);
+        location.href = target.value;
+    }
+</script>
+<style>
+
+    #list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 300px;
+        width: 100%;
+    }
+    .number-card:first-of-type {
+        background: yellow;
+    }
+    .number-card {
+        margin: 10px;
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 1px black;
+    }
+    .title-box {
+        display: flex;
+        height: 7rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .title-box #title .title {
+        display: flex;
+        border: 1px solid black;
+        width: 4rem;
+        height: 5rem;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 1px black;
+    }
+    .title-box #title.draw .title {
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) infinite both;
+        transform: translate3d(0, 0, 0);
+    }
+    @keyframes shake {
+        10%, 90% {
+            transform: translate3d(-1px, 0, 0);
+        }
+
+        20%, 80% {
+            transform: translate3d(2px, 0, 0);
+        }
+
+        30%, 50%, 70% {
+            transform: translate3d(-4px, 0, 0);
+        }
+
+        40%, 60% {
+            transform: translate3d(4px, 0, 0);
+        }
+        }
+</style>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Board-Game Streams Number Drawer</div>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="form-group result-group">
+                <label for="">Current Card<span id="current_label"></span></label>
+                <div class="form-control title-box">
+                    <h1 id="title"><span class="title"></span></h1>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Next Card Draw<span id="next_label"></span></label>
+                <input type="text" class="form-control" id="next" placeholder="Next Card Draw" readonly
+                    style="font-size: 2rem;height: 4rem;">
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <label for="">Numbers</label>
+                    <div id="list">
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label for="">Identifier Image</label>
+                    <div>
+                        <img id="input_id_image" src="https://robohash.org/default.png?set=set4"
+                            style="width:80px; height:80px;">
+                    </div>
+                    <div id="input_id_dice"></div>
+                </div>
+            </div>
+            <a href="javascript:createLink(this);" class="btn btn-success">Copy Link</a>
+            <a href="?" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="form-group">
+            <input type="link" class="form-control" id="link" placeholder="Link" readonly>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p id="qrcode"></p>
+            </div>
+            <div class="col-lg-8">
+                <h5>Powered by Stellar Lumens Ledger.</h5>
+                <ul style="text-align:justify">
+                    <li>1~10 Card x 1</li>
+                    <li>11~19 Card x 2</li>
+                    <li>20~30 Card x 1</li>
+                    <li>Joker Card x 1</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
