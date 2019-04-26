@@ -102,6 +102,8 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 inPocket.push(i);
             }
             inPocket.push(0);
+            game.nextTime = null;
+            $("#next").val("Loading...");
 
             const readyTime = 10;
             let firstBlock = await getLedger(game.start_number);
@@ -154,7 +156,6 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                     $("#title").removeClass("draw");
                 }
             })
-            game.nextTime = null;
             game.done = outPocket.length >= 20;
             if (!game.done) {
                 game.nextTime = currentTime + gap;
