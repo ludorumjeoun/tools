@@ -148,6 +148,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 //     drawNumber);
                 outPocket.push(drawNumber);
                 currentTime = nextTime;
+                console.log(outPocket.join(' '));
                 const liNumbers = outPocket.reverse().map(number => {
                     return $('<div/>', {
                         "class": "number-card",
