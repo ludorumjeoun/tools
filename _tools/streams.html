@@ -199,6 +199,17 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                     $("#next").val("Done");
                 }
             }, 100);
+
+            var result_link = location.href.split('?')[0] + '?' + $.param({
+                b: game.start_number,
+                t: game.draw_term,
+            });
+            var typeNumber = 0;
+            var errorCorrectionLevel = 'L';
+            var qr = qrcode(typeNumber, errorCorrectionLevel);
+            qr.addData(result_link);
+            qr.make();
+            $qrcode.html([qr.createImgTag(4, 4, result_link)]);
         })();
     });
 
