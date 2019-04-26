@@ -14,6 +14,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
         moment.defaultFormat = 'YYYY-MM-DD HH:mm:ss'
 
         const server = new StellarSdk.Server('https://horizon.stellar.org/');
+        const serverOps = new StellarSdk.Server('https://horizon-mon.stellar-ops.com/');
         var $list = $('#list');
         var $link = $('#link');
         var $open = $('#open');
@@ -44,7 +45,15 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                     sessionStorage.clear();
                 }
                 try {
-                    const record = await server.ledgers().ledger(number).call();
+                    const record = await (async () => {
+                        try {
+                            return await server.ledgers().ledger(number).call();
+                        } catch (e) {
+                            if (e.message == "Not Found") {
+                                return await serverOps.ledgers().ledger(number).call();
+                            }
+                        }
+                    })();
                     if (record) {
                         const ledger  =  {
                             prev_hash: record.prev_hash,
@@ -57,10 +66,10 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                     }
                 } catch (e) {
                     if (e.message == "Not Found") {
-
-                    } else {
+                    } else  {
                         console.error(e);
                     }
+
                 }
             }
             const ledger = await getFromCahceOrNetwork();
@@ -71,7 +80,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
             return ledger;
         }
         async function getLastLedger() {
-            const ledgers = await server.ledgers().order("desc").limit(1).call();
+            const ledgers = await serverOps.ledgers().order("desc").limit(1).call();
             const last = ledgers.records[0]
             const key = 'stellar_ledger_' + last.sequence;
             const ledger = {
