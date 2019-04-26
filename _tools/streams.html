@@ -167,8 +167,8 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
             $("#list").html(liNumbers);
             outPocket.slice().reverse().slice(-1).forEach(number => {
                 const old = $("#title").data("old");
-                if (old != number) {
-                    $("#title").data("old", number);
+                if (old != currentBlock.hash) {
+                    $("#title").data("old", currentBlock.hash);
                     $("#title .title").text(number == 0 ? "✪" : number);
                     $("#title").removeClass("draw");
                 }
