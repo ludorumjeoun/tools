@@ -117,7 +117,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
             const readyTime = 10;
             let firstBlock = await getLedger(game.start_number);
             let firstTime = new Date(firstBlock.closed_at).getTime() + (readyTime * 1000);
-            let lastTime = Math.min(new Date().getTime(), firstTime + (game.draw_term * 1000 * inPocket.length));
+            let lastTime = Math.min(new Date().getTime(), firstTime + (game.draw_term * 1000 * 20));
             let currentTime = firstTime;
             let currentBlock = firstBlock;
             const gap =  (game.draw_term * 1000) - 1;
@@ -148,7 +148,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 //     drawNumber);
                 outPocket.push(drawNumber);
                 currentTime = nextTime;
-                console.log(outPocket.join(' '));
+                console.log(outPocket.join(' '), currentTime, lastTime);
                 const liNumbers = outPocket.slice().reverse().map(number => {
                     return $('<div/>', {
                         "class": "number-card",
