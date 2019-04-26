@@ -236,6 +236,15 @@ description: "보드게임  Streams를 즐기는 것에 무료로 이더리움(E
         align-items: center;
         box-shadow: 1px 1px black;
     }
+    .rule-columns {
+        display: flex;
+    }
+    .rule-column {
+        display: flex; flex-direction: row; width: 50%; justify-content: space-between; flex-wrap: wrap;
+    }
+    .rule-row {
+        width: 200px;
+    }
     .title-box {
         display: flex;
         height: 7rem;
@@ -271,7 +280,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 이더리움(E
         40%, 60% {
             transform: translate3d(4px, 0, 0);
         }
-        }
+    }
 </style>
 <div class="card">
     <div class="card-header">
@@ -325,6 +334,32 @@ description: "보드게임  Streams를 즐기는 것에 무료로 이더리움(E
                     <li>20~30 Card x 1</li>
                     <li>Joker Card x 1</li>
                 </ul>
+                <div class="rule-columns">
+                    <div class="rule-column">
+                        <div class="rule-row">Series 1 = 0</div>
+                        <div class="rule-row">Series 2 = 1</div>
+                        <div class="rule-row">Series 3 = 3</div>
+                        <div class="rule-row">Series 4 = 5</div>
+                        <div class="rule-row">Series 5 = 7</div>
+                        <div class="rule-row">Series 6 = 9 or 3</div>
+                        <div class="rule-row">Series 7 = 11</div>
+                        <div class="rule-row">Series 8 = 15</div>
+                        <div class="rule-row">Series 9 = 20</div>
+                        <div class="rule-row">Series 10 = 25</div>
+                    </div>
+                    <div class="rule-column">
+                        <div class="rule-row">Series 11 = 30</div>
+                        <div class="rule-row">Series 12 = 35 or 20</div>
+                        <div class="rule-row">Series 13 = 40</div>
+                        <div class="rule-row">Series 14 = 50</div>
+                        <div class="rule-row">Series 15 = 60</div>
+                        <div class="rule-row">Series 16 = 70</div>
+                        <div class="rule-row">Series 17 = 85 or 50</div>
+                        <div class="rule-row">Series 18 = 100</div>
+                        <div class="rule-row">Series 19 = 150</div>
+                        <div class="rule-row">Series 20 = 300</div>
+                    </div>
+                </div>
             </div>
         </div>
 
