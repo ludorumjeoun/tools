@@ -209,6 +209,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
             var qr = qrcode(typeNumber, errorCorrectionLevel);
             qr.addData(result_link);
             qr.make();
+            $link.val(result_link);
             $qrcode.html([qr.createImgTag(4, 4, result_link)]);
         })();
     });
