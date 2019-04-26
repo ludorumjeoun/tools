@@ -149,7 +149,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 outPocket.push(drawNumber);
                 currentTime = nextTime;
                 console.log(outPocket.join(' '));
-                const liNumbers = outPocket.reverse().map(number => {
+                const liNumbers = outPocket.slice().reverse().map(number => {
                     return $('<div/>', {
                         "class": "number-card",
                         "text": number == 0 ? "✪" : number
@@ -158,14 +158,14 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 $("#list").html(liNumbers);
             }
             console.log(inPocket, outPocket);
-            const liNumbers = outPocket.reverse().map(number => {
+            const liNumbers = outPocket.slice().reverse().map(number => {
                 return $('<div/>', {
                     "class": "number-card",
                     "text": number == 0 ? "✪" : number
                 })
             })
             $("#list").html(liNumbers);
-            outPocket.reverse().slice(-1).forEach(number => {
+            outPocket.slice().reverse().slice(-1).forEach(number => {
                 const old = $("#title").data("old");
                 if (old != number) {
                     $("#title").data("old", number);
