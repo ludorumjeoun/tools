@@ -305,7 +305,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 if ($(this).data('number')) {
                     return;
                 }
-                if (game.unsolved) {
+                if (game.unsolved  === 0 || game.unsolved) {
                     const number = game.unsolved;
                     const index = $(this).data('index');
                     game.unsolved = null;
