@@ -168,7 +168,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
             outPocket.slice(-1).forEach(number => {
                 const old = $("#title").data("old");
                 if (old != currentTime) {
-                    if (game.unsolved) {
+                    if (game.unsolved && game.solvedHash != currentBlock.hash) {
                         const unsolvedNumber = game.unsolved;
                         const unsolvedHands = $("#hand_up .hand").filter((idx, h) => {
                             return $(h).data('number') == undefined;
@@ -176,6 +176,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                         const randomIdx = window.crypto.getRandomValues(new Uint8Array(1))[0] % unsolvedHands.length;
                         unsolvedHands[randomIdx].click();
                     }
+                    game.unsolvedHash = currentBlock.hash;
                     game.unsolved = number;
                     $("#title").data("old", currentTime);
                     $("#title .title").text(number == 0 ? "✪" : number);
@@ -214,6 +215,7 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 const savedHand = localStorage.getItem(`streams_${game.start_number}_${game.draw_term}`);
                 if (savedHand) {
                     game.hand = JSON.parse(savedHand);
+                    game.solvedHash = localStorage.getItem(`streams_${game.start_number}_${game.draw_term}_hash`);
                 }
             } catch (e) {
 
@@ -308,11 +310,15 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                 if (game.unsolved  === 0 || game.unsolved) {
                     const number = game.unsolved;
                     const index = $(this).data('index');
+                    game.solvedHash = game.unsolvedHash;
                     game.unsolved = null;
+                    game.unsolvedHash = null;
+                    game.hand.push(index);
                     game.hand[index] = number;
                     $(this).data('number', number);
                     $(this).find('.num').text(number == 0 ? "✪" : number);
                     localStorage.setItem(`streams_${game.start_number}_${game.draw_term}`, JSON.stringify(game.hand));
+                    localStorage.setItem(`streams_${game.start_number}_${game.draw_term}_hash`, game.solvedHash);
                 }
             })
 
