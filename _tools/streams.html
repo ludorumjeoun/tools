@@ -313,7 +313,6 @@ description: "보드게임  Streams를 즐기는 것에 무료로 스텔라 루�
                     game.solvedHash = game.unsolvedHash;
                     game.unsolved = null;
                     game.unsolvedHash = null;
-                    game.hand.push(index);
                     game.hand[index] = number;
                     $(this).data('number', number);
                     $(this).find('.num').text(number == 0 ? "✪" : number);
