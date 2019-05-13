@@ -2,7 +2,7 @@
 layout: page
 title: 공정한 디지털 보드게임 즐기기
 category: blog
-tags: crypto idea
+tags: [ crypto, idea ]
 ---
 
 두명 이상의 사람들이 서로간에 아무런 신뢰 없이 공정한 보드게임을 즐기는 방법에 대한 아이디어들을 적어보았습니다.
