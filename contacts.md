@@ -9,6 +9,25 @@ permalink: contacts
 
 {% include donation.html %}
 
+#### If you want share critical secrets with me, use PGP or [Keybase@ludorum](https://keybase.io/encrypt#ludorum)
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: https://keybase.io/ludorum
+Version: Keybase Go 3.1.2 (darwin)
+
+xjMEXK2DghYJKwYBBAHaRw8BAQdAPrWqulzWHfqm57MAZox7YGMEYucZ1dBOa57Z
+X+sX+FrNIkx1ZG9ydW0gSmVvdW4gKElEKSA8bHVkb3J1bUBwbS5tZT7CcwQTFggA
+JQUCXK2DggkQdOyoNqlUOPoCGwMFCwkIBwIGFQoJCAsCBBYCAwEAAHl0AQA76+uN
+gIRy7vqWaoeZO+xo9xq8rEHUdB2XYvTr1tu4AwEAezo3hkkKbKBaugA150FfVgC1
+dzwK1ylHADl2cow1CQbOOARcrYOCEgorBgEEAZdVAQUBAQdAc6oHTnfxXT/TwIQp
+qP/V/D8XVc9G+e6I0/ROmunUTwUDAQgHwngEGBYIACAWIQSngdc8jGgrc/GnMNp0
+7Kg2qVQ4+gUCXK2DggIbDAAKCRB07Kg2qVQ4+kbcAQDdFlBHxVMk2AyEOqJby1sC
+31QDm1V9lRCo6Hnv3Xi5JwD/TNgyWiyjNKaHpgoZirRYEUKsOTenOMRsfH+liXua
+nAI=
+=XyUm
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
 ### 문의 내역
 <table>
 {% for inquiry in site.data.inquiry reversed %}
