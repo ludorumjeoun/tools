@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tools
-permlink: tools
+permlink: /tools
 ---
 
 <ul>

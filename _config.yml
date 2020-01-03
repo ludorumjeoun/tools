@@ -17,8 +17,7 @@ title: ludorum.dev
 author: ludorum
 email: ludorum@pm.com
 description: >- # this means to ignore newlines until "baseurl:"
-  블로그 겸, 유틸리티 프로그램을 모아둔 사이트입니다.
-  주로 기술적인 내용과 함께 최근 관심있게 보는 블록체인과 관련된 내용들을 다루고 있습니다.
+  소프트웨어 개발자의 개인 블로그입니다.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ludorum.dev" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ludorumx
@@ -28,6 +27,8 @@ google_analytics: UA-138175353-1
 permalink: /:categories/:year/:month/:day/:title/
 
 collections:
+  pages:
+    output: true
   tools:
     output: true
     permalink: /:name.html
