@@ -7,6 +7,9 @@ permalink: /donors
 ## 후원하기
 
 {% include donation.html %}  
+
+
+<!--
 후원하신 분께서는 누락되거나, 잘못된 정보가 있을 경우 반드시 연락주세요.
 
 ## 후원자
@@ -18,3 +21,5 @@ permalink: /donors
 <br/>
 {% endif %}
 {% endfor %}
+
+-->

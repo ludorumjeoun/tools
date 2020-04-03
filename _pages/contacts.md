@@ -28,6 +28,8 @@ nAI=
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
+<!--
+
 ### 문의 내역
 <table>
 {% for inquiry in site.data.inquiry reversed %}
@@ -37,3 +39,5 @@ nAI=
 {% endfor %}
 {% endfor %}
 </table>
+
+-->
